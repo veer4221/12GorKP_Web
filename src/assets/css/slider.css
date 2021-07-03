@@ -1,0 +1,6 @@
+.react-3d-carousel {
+    width: 400px;
+    height: 300px;
+    position: relative;
+    perspective: 1000px;
+}
