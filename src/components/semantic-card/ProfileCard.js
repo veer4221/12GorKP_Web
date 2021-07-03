@@ -6,6 +6,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import { Grid, Box, Card, Button } from "@material-ui/core";
 import "../../assets/css/profilecard.css";
+import  { Redirect } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
+
 import { useState } from "react";
 import TempIMG from "../../assets/img/resume.png"
 
@@ -28,10 +31,17 @@ const useStyles = makeStyles((theme) => ({
 
 function ProfileCard() {
   const classes = useStyles();
+  let history = useHistory()
   const [hovering, setHovering] = useState(false);
+
 
   const toggelCard = ()=>{
     setHovering(!hovering);
+  }
+  const redirectProfile = () =>{
+
+      history.push(`/admin/personprofile`)
+    // return <Redirect to=''  />
   }
   return (
     <div
@@ -93,7 +103,7 @@ function ProfileCard() {
                           variant="contained"
                           color="secondary"
                           style={{ alignContent: "right" }}
-                          onClick={()=>alert("function called")}
+                          onClick={redirectProfile}
                         >
                           View Profile
                         </Button>

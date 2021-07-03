@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Grid, Box, Card } from "@material-ui/core";
 import { Carousel } from "react-responsive-carousel";
 
@@ -38,11 +38,15 @@ const useStyles = makeStyles((theme) => ({
 
 function HomePage() {
   const classes = useStyles();
+
   const [age, setAge] = React.useState("");
 
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+  useEffect(()=>{
+
+  },[])
   return (
     <>
       <Box>

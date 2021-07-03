@@ -14,17 +14,38 @@ import Sidebar from "components/Sidebar/Sidebar.js";
 import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 
 import routes from "routes.js";
+import { adminpanelRouts } from "../routes";
+
 
 import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
-
+import Fullscreen from 'fullscreen-react';
 import bgImage from "assets/img/sidebar-2.jpg";
 import logo from "assets/img/ulogo1.PNG";
+
+import {
+  BrowserView,
+  MobileView,
+  isBrowser,
+  isMobile,
+} from "react-device-detect";
 
 let ps;
 
 const switchRoutes = (
   <Switch>
     {routes.map((prop, key) => {
+      if (prop.layout === "/admin") {
+        return (
+          <Route
+            path={prop.layout + prop.path}
+            component={prop.component}
+            key={key}
+          />
+        );
+      }
+      return null;
+    })}
+    {adminpanelRouts.map((prop, key) => {
       if (prop.layout === "/admin") {
         return (
           <Route
@@ -52,6 +73,9 @@ export default function Admin({ ...rest }) {
   const [color, setColor] = React.useState("blue");
   const [fixedClasses, setFixedClasses] = React.useState("dropdown show");
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [isFullscreenEnabled, setIsFullscreenEnabled] = React.useState(false);
+  // const [isEnter, setIsEnter] = useState(false);
+
   const handleImageClick = (image) => {
     setImage(image);
   };
@@ -76,8 +100,16 @@ export default function Admin({ ...rest }) {
       setMobileOpen(false);
     }
   };
+  const Mobilefullscreen = () => {
+
+    if(isMobile){
+    document.documentElement.requestFullscreen().catch((e)=>{console.log(e)});
+    }
+  }
   // initialize and destroy the PerfectScrollbar plugin
-  React.useEffect(() => {
+  React.useEffect(async () => {
+    await Mobilefullscreen();
+
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(mainPanel.current, {
         suppressScrollX: true,
@@ -109,6 +141,7 @@ export default function Admin({ ...rest }) {
       <div className={classes.mainPanel} ref={mainPanel}>
         <Navbar
           routes={routes}
+          adminpanelRouts={adminpanelRouts}
           setMobileOpen={setMobileOpen}
           mobileOpen={mobileOpen}
           handleDrawerToggle={handleDrawerToggle}

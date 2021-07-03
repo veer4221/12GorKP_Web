@@ -16,6 +16,8 @@
 
 */
 // @material-ui/icons
+/* eslint-disable */
+
 import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
 import LibraryBooks from "@material-ui/icons/LibraryBooks";
@@ -35,6 +37,7 @@ import Maps from "views/Maps/Maps.js";
 import NotificationsPage from "views/Notifications/Notifications.js";
 import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro.js";
 import HomeIcon from "@material-ui/icons/Home";
+import PersonProfile from "./views/personProfile/PersonProfile"
 // core components/views for RTL layout
 import RTLPage from "views/RTLPage/RTLPage.js";
 import HomePage from "views/homepage/HomePage";
@@ -122,4 +125,13 @@ const dashboardRoutes = [
   },
 ];
 
+const adminpanelRouts = [
+  {
+    path: "/personProfile",
+    name: "personProfile",
+    component:PersonProfile ,
+    layout: "/admin",
+  },
+];
 export default dashboardRoutes;
+export{ adminpanelRouts};
